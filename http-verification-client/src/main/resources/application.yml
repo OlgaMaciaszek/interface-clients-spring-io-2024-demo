@@ -1,0 +1,8 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: http-verification-client
+http:
+  verification:
+    uri: http://localhost:8081
