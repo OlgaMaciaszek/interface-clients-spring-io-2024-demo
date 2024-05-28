@@ -1,8 +1,15 @@
 server:
   port: 8080
 spring:
+  cloud:
+    discovery:
+      client:
+        simple:
+          instances:
+            http-verification:
+              - uri: http://localhost:8081
   application:
     name: http-verification-client
-http:
-  verification:
-    uri: http://localhost:8081
+#http:
+#  verification:
+#    uri: http://localhost:8081

@@ -2,4 +2,4 @@ server:
   port: 8081
 spring:
   application:
-    name: http-verification-server
+    name: http-verification
