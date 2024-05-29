@@ -10,6 +10,8 @@
 	<modules>
 		<module>http-verification-client</module>
 		<module>http-verification</module>
+		<module>rsocket-verification</module>
+		<module>rsocket-verification-client</module>
 	</modules>
 
 </project>

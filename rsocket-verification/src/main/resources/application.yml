@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: rsocket-verification
+  rsocket:
+    server:
+      port: 7000

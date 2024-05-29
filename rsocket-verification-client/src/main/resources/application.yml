@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: rsocket-verification-client
+server:
+  port: 9081
