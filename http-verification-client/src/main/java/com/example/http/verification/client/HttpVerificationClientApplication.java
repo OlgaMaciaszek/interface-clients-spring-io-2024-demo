@@ -1,5 +1,6 @@
 package com.example.http.verification.client;
 
+import com.example.http.verification.client.clients.PersonService;
 import com.example.http.verification.client.clients.VerificationService;
 
 import org.springframework.boot.SpringApplication;
@@ -49,6 +50,11 @@ public class HttpVerificationClientApplication {
 	@Bean
 	public VerificationService verificationService(HttpServiceProxyFactory httpServiceProxyFactory) {
 		return httpServiceProxyFactory.createClient(VerificationService.class);
+	}
+
+	@Bean
+	public PersonService personService(HttpServiceProxyFactory httpServiceProxyFactory) {
+		return httpServiceProxyFactory.createClient(PersonService.class);
 	}
 }
 
