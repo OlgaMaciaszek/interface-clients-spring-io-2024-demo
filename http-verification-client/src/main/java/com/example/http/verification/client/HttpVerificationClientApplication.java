@@ -50,7 +50,6 @@ public class HttpVerificationClientApplication {
 				.build();
 	}
 
-
 	@Bean
 	public VerificationService verificationService(HttpServiceProxyFactory httpServiceProxyFactory) {
 		return httpServiceProxyFactory.createClient(VerificationService.class);
