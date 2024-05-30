@@ -1,5 +1,6 @@
 package com.example.rsocketverificationclient;
 
+import com.example.rsocketverificationclient.clients.CountService;
 import com.example.rsocketverificationclient.clients.VerificationService;
 
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,11 @@ public class RsocketVerificationClientApplication {
 	@Bean
 	public VerificationService verificationService(RSocketServiceProxyFactory httpServiceProxyFactory) {
 		return httpServiceProxyFactory.createClient(VerificationService.class);
+	}
+
+	@Bean
+	CountService countService(RSocketServiceProxyFactory httpServiceProxyFactory) {
+		return httpServiceProxyFactory.createClient(CountService.class);
 	}
 
 	@Bean
