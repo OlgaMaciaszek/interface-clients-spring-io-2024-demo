@@ -25,14 +25,17 @@ public class HttpVerificationClientApplication {
 
 //	Set hard-coded URI
 //	@Bean
-//	public HttpServiceProxyFactory httpServiceProxyFactory(RestClient.Builder restClientBuilder) {
-//		RestClient restClient = restClientBuilder
-//				.baseUrl(verificationServiceUrl)
-//				.build();
-//		RestClientAdapter restClientAdapter = RestClientAdapter.create(restClient);
-//		return HttpServiceProxyFactory.builderFor(restClientAdapter)
-//				.build();
-//	}
+//public HttpServiceProxyFactory httpServiceProxyFactory(RestClient.Builder restClientBuilder) {
+//	RestClient restClient = restClientBuilder
+//			.baseUrl(verificationServiceUrl)
+//			.build();
+//	RestClientAdapter restClientAdapter = RestClientAdapter.create(restClient);
+//	return HttpServiceProxyFactory.builderFor(restClientAdapter)
+//			.embeddedValueResolver(customValueResolver) // for resolving placeholders and expressions in the url
+//			.conversionService(customConversionService) // for formatting input values as Strings
+//			.customArgumentResolver(customArgumentResolver) // a custom HttpServiceArgumentResolver invoked before other resolvers
+//			.build();
+//}
 
 	// Using load-balancing
 	@Bean
@@ -42,7 +45,8 @@ public class HttpVerificationClientApplication {
 				.baseUrl("http://http-verification")
 				.build();
 		RestClientAdapter restClientAdapter = RestClientAdapter.create(restClient);
-		return HttpServiceProxyFactory.builderFor(restClientAdapter)
+		return HttpServiceProxyFactory
+				.builderFor(restClientAdapter)
 				.build();
 	}
 
@@ -57,5 +61,4 @@ public class HttpVerificationClientApplication {
 		return httpServiceProxyFactory.createClient(PersonService.class);
 	}
 }
-
 
