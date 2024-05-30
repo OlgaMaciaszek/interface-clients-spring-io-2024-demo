@@ -39,7 +39,13 @@ public class RsocketVerificationClientApplication {
 		RSocketRequester requester = RSocketRequester.builder()
 				.rsocketStrategies(strategies)
 				.tcp("localhost", 7000);
-		return RSocketServiceProxyFactory.builder(requester).build();
+		return RSocketServiceProxyFactory
+				.builder(requester)
+//				.embeddedValueResolver(customValueResolver) // for resolving placeholders and expressions in the value
+//				.customArgumentResolver(customArgumentResolver) // register a custom RSocketServiceArgumentResolver
+//																// invoked before other resolvers
+//				.reactiveAdapterRegistry(customReactiveAdapterRegistry) // a custom ReactiveAdapterRegistry
+				.build();
 	}
 
 }
