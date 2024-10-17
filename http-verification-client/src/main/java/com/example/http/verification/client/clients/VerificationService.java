@@ -80,7 +80,7 @@ public interface VerificationService {
  String postMultipart(MultipartFile file);
 
 
-//	Supported by WebClient only at this point
+//	Supported by WebClient only
 //	@GetExchange("/attribute")
 //	Mono<String> attribute(@RequestAttribute String org);
 
