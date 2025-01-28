@@ -30,12 +30,12 @@ public class VerificationController {
 
 	private final Random random = new Random();
 
-	@RequestMapping("/verification/count")
+	@GetMapping("/verification/count")
 	int count() {
 		return random.nextInt() & Integer.MAX_VALUE;
 	}
 
-	@RequestMapping("/count")
+	@GetMapping("/count")
 	int secondCount() {
 		return random.nextInt() & Integer.MAX_VALUE;
 	}

@@ -3,6 +3,7 @@ package com.example.http.verification.client.clients;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 
 import com.example.http.verification.client.dto.VerificationRequest;
 import com.example.http.verification.client.dto.VerificationResult;
@@ -10,6 +11,7 @@ import com.example.http.verification.client.dto.VerificationResult;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.service.annotation.PostExchange;
+import org.springframework.web.util.UriBuilderFactory;
 
 /**
  * @author Olga Maciaszek-Sharma
@@ -28,19 +31,22 @@ import org.springframework.web.service.annotation.PostExchange;
 public interface VerificationService {
 
 	@HttpExchange(method = "GET", url = "/count")
-	int count(URI uri);
+	int count(Optional<URI> uri);
+
+	@HttpExchange(method = "GET", url = "/count")
+	int countFactory(Optional<UriBuilderFactory> factory);
 
 	@GetExchange(url = "/count")
 	int countWithMetaAnnotation();
 
-	@HttpExchange(url = "/count")
-	int countWithMethod(HttpMethod method);
+	@PostExchange(url = "/count")
+	int countWithMethod(Optional<HttpMethod> method);
 
 	@GetExchange("/test")
 	String test();
 
 	@GetExchange("/header")
-	String header(@RequestHeader String header);
+	String header(@RequestHeader Optional<String> header);
 
 	@GetExchange("/headers")
 	String headers(@RequestHeader Map<String, String> headers);
@@ -67,17 +73,17 @@ public interface VerificationService {
 	String cookieValues(@CookieValue Collection<String> cookieValues);
 
 	@GetExchange("/{variable}")
-	String pathVariable(@PathVariable String variable);
+	String pathVariable(@Nullable @PathVariable String variable);
 
 	@PostExchange()
-	VerificationResult verify(@RequestBody VerificationRequest request);
+	VerificationResult verify(@RequestBody Optional<VerificationRequest> request);
 
 
- @PostExchange(value = "/parts", contentType = MediaType.MULTIPART_FORM_DATA_VALUE)
- String postParts(@RequestPart String part1, @RequestPart HttpEntity<String> part2);
+	@PostExchange(value = "/parts", contentType = MediaType.MULTIPART_FORM_DATA_VALUE)
+	String postParts(@RequestPart String part1, @RequestPart HttpEntity<String> part2);
 
- @PostExchange(value = "/multipart", contentType = MediaType.MULTIPART_FORM_DATA_VALUE)
- String postMultipart(MultipartFile file);
+	@PostExchange(value = "/multipart", contentType = MediaType.MULTIPART_FORM_DATA_VALUE)
+	String postMultipart(MultipartFile file);
 
 
 //	Supported by WebClient only at this point

@@ -3,20 +3,23 @@ package com.example.http.verification.client.controllers;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import com.example.http.verification.client.clients.VerificationService;
 import com.example.http.verification.client.dto.VerificationRequest;
 import com.example.http.verification.client.dto.VerificationResult;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 
 /**
  * @author Olga Maciaszek-Sharma
@@ -24,6 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 public class VerificationClientController {
+
+	// For debugging
+	@Autowired
+	ConfigurableApplicationContext context;
 
 	private final VerificationService verificationService;
 
@@ -33,7 +40,12 @@ public class VerificationClientController {
 
 	@RequestMapping("/count")
 	int count() {
-		return verificationService.count(URI.create("http://localhost:8081/count"));
+		return verificationService.count(Optional.of(URI.create("http://localhost:8081/count")));
+	}
+
+	@RequestMapping("/count/factory")
+	int countFactory() {
+		return verificationService.countFactory(Optional.of(new DefaultUriBuilderFactory("http://localhost:8081/count")));
 	}
 
 	@GetMapping("/count/meta")
@@ -43,7 +55,7 @@ public class VerificationClientController {
 
 	@RequestMapping("/count/method")
 	int countWithMethod() {
-		return verificationService.countWithMethod(HttpMethod.GET);
+		return verificationService.countWithMethod(Optional.empty());
 	}
 
 	@GetMapping("/test")
@@ -53,12 +65,12 @@ public class VerificationClientController {
 
 	@PostMapping()
 	VerificationResult verify() {
-		return verificationService.verify(new VerificationRequest("Anna", "Smith"));
+		return verificationService.verify(Optional.of(new VerificationRequest("Anna", "Smith")));
 	}
 
 	@GetMapping("/header")
 	String header() {
-		return verificationService.header("headerValue");
+		return verificationService.header(Optional.of("headerValue"));
 	}
 
 	@GetMapping("/headers")
@@ -103,7 +115,7 @@ public class VerificationClientController {
 
 	@GetMapping("/path")
 	String pathVariable() {
-		return verificationService.pathVariable("test");
+		return verificationService.pathVariable(null);
 	}
 
 	@PostMapping("/parts")
