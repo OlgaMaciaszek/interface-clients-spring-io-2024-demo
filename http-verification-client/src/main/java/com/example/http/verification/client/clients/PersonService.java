@@ -23,6 +23,6 @@ public interface PersonService {
 	@PostExchange
 	void add(@RequestBody Person person);
 
-	@GetExchange
+	@GetExchange("/test")
 	String test();
 }

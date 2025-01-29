@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.service.annotation.GetExchange;
 
 /**
  * @author Olga Maciaszek-Sharma
@@ -35,5 +36,10 @@ class PersonController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public void add() {
 		personService.add(new Person("Tom", "Connor", "t.connor@example.com"));
+	}
+
+	@GetExchange("/test")
+	String test() {
+		return personService.test();
 	}
 }

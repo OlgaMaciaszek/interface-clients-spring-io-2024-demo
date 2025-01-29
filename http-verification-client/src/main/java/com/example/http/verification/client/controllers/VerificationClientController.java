@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.service.registry.HttpServiceProxyRegistry;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
 /**
@@ -34,8 +35,15 @@ public class VerificationClientController {
 
 	private final VerificationService verificationService;
 
-	public VerificationClientController(VerificationService verificationService) {
+	private final VerificationService verificationServiceFromRegistry;
+
+	private final HttpServiceProxyRegistry registry;
+
+	public VerificationClientController(VerificationService verificationService,
+			HttpServiceProxyRegistry registry) {
 		this.verificationService = verificationService;
+		this.registry = registry;
+		this.verificationServiceFromRegistry = registry.getClient(VerificationService.class);
 	}
 
 	@RequestMapping("/count")
@@ -61,6 +69,11 @@ public class VerificationClientController {
 	@GetMapping("/test")
 	String test() {
 		return verificationService.test();
+	}
+
+	@GetMapping("/test2")
+	String test2() {
+		return verificationServiceFromRegistry.test();
 	}
 
 	@PostMapping()
