@@ -28,4 +28,9 @@ class PersonController implements PersonService {
 	public void add(@RequestBody Person person) {
 		persons.put(UUID.randomUUID(), person);
 	}
+
+	@Override
+	public String test() {
+		return "test";
+	}
 }

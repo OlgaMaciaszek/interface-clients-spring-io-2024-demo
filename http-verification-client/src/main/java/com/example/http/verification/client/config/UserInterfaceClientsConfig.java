@@ -16,7 +16,7 @@ public class UserInterfaceClientsConfig {
 	@Bean
 	public RestClientProxyRegistry.Builder restClientProxyRegistryBuilder(RestClient.Builder restClientBuilder) {
 		return RestClientProxyRegistry.builder(restClientBuilder)
-				.addClient("http://localhost:8081", "verificationClient",
+				.addClient("http://localhost:8081", "programmaticVerificationClient",
 						httpServiceConfigurer -> httpServiceConfigurer.addServiceTypes(PersonService.class),
 						clientBuilder -> { // dosth
 						}, proxyFactoryBuilderConsumer -> {
