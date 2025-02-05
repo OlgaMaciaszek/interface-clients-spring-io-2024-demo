@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -29,6 +30,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class VerificationController {
 
 	private final Random random = new Random();
+
+	private final RestClient.Builder restClientBuilder;
+
+	VerificationController(RestClient.Builder restClientBuilder) {
+		this.restClientBuilder = restClientBuilder;
+	}
 
 	@GetMapping("/verification/count")
 	int count() {

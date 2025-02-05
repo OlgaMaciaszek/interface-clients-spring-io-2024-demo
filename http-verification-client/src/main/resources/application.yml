@@ -1,7 +1,18 @@
 server:
   port: 8080
 spring:
+  interface-clients:
+    http:
+      client-groups:
+        verificationClient:
+          read-timeout:
+            seconds: 555s
+      connect-timeout: 999s
   cloud:
+    loadbalancer:
+      clients:
+        verificationClient:
+          hint-header-name: "test"
     compatibility-verifier:
       enabled: false
     discovery:
@@ -12,6 +23,9 @@ spring:
               - uri: http://localhost:8081
   application:
     name: http-verification-client
+  http:
+    client:
+      read-timeout: 2222s
 #http:
 #  verification:
 #    uri: http://localhost:8081
