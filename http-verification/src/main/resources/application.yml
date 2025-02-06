@@ -1,5 +1,10 @@
 server:
   port: 8081
 spring:
+  http:
+    client:
+      read-timeout: 999s
+  interface-clients:
+    enabled: false
   application:
     name: http-verification

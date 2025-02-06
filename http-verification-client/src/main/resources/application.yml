@@ -1,6 +1,12 @@
 server:
   port: 8080
 spring:
+  interface-clients:
+    http:
+      client-groups:
+        verificationClient:
+          read-timeout: 555s
+      connect-timeout: 999s
   cloud:
     compatibility-verifier:
       enabled: false
