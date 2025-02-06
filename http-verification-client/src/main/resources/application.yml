@@ -5,14 +5,14 @@ spring:
     http:
       client-groups:
         verificationClient:
-          read-timeout:
-            seconds: 555s
+          base-url: http://localhost:8081
+          read-timeout: 555s
       connect-timeout: 999s
   cloud:
-    loadbalancer:
-      clients:
-        verificationClient:
-          hint-header-name: "test"
+#    loadbalancer:
+#      clients:
+#        verificationClient:
+#          hint-header-name: "test"
     compatibility-verifier:
       enabled: false
     discovery:
